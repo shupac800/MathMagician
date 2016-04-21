@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +9,15 @@ namespace MathMagician
 {
     public class Output
     {
+        const int sleepInterval = 250;
+
         public static void printIntegers()
         {
             int i = 0;
             while(true)
             {
                 Console.Write(i++ + " ");
+                Thread.Sleep(sleepInterval);
             }
         }
         public static string printIntegers(int repeat)  // overload printIntegers method
@@ -31,13 +35,15 @@ namespace MathMagician
             int f1 = 1;
             int f2 = 1;
             Console.Write("1 1 ");
-            while(true)
+            while(f1 + f2 > 0)
             {
                 int f = f1 + f2;
                 Console.Write(f + " ");
                 f1 = f2;
                 f2 = f;
+                Thread.Sleep(sleepInterval);
             }
+            Console.WriteLine("\nError: overflow!");
         }
         public static string printFibonacci(int repeat)  // overload printFibonacci method
         {
@@ -64,7 +70,8 @@ namespace MathMagician
             int max = 100000;
             
             var watch = System.Diagnostics.Stopwatch.StartNew();
-            while (testNum < max)
+            //while (testNum < max)
+            while(true)
             { 
                 bool isPrime = true;  // reset flag
                 for (int i = 0; i < primes.Count; i++)
@@ -78,7 +85,8 @@ namespace MathMagician
                 if (isPrime)
                 {
                     primes.Add(testNum);
-                    //Console.Write(testNum + " ");
+                    Console.Write(testNum + " ");  // printing results slows algorithm down!
+                    Thread.Sleep(sleepInterval);
                 }
                 testNum += 2;
             }
