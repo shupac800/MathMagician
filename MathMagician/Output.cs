@@ -61,8 +61,10 @@ namespace MathMagician
             primes.Add(2);
             Console.Write("2 ");
             int testNum = 3;
+            int max = 100000;
             
-            while(true)
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            while (testNum < max)
             { 
                 bool isPrime = true;  // reset flag
                 for (int i = 0; i < primes.Count; i++)
@@ -76,10 +78,12 @@ namespace MathMagician
                 if (isPrime)
                 {
                     primes.Add(testNum);
-                    Console.Write(testNum + " ");
+                    //Console.Write(testNum + " ");
                 }
                 testNum += 2;
             }
+            watch.Stop();
+            Console.WriteLine("\n{0} milliseconds to find all {2:n0} primes less than {1:n0}", watch.ElapsedMilliseconds, max, primes.Count);
         }
 
         public static string printPrimes(int repeat)
